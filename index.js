@@ -41,7 +41,7 @@ function lineEventHandler (event) {
 
   // const result = await askOpenAI(event.message.text)
 
-  return client.replyMessage(event.replyToken, {
+  return lineClient.replyMessage(event.replyToken, {
     type: 'text',
     text: 'yoyoyoyoyo'
   })

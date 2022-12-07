@@ -105,3 +105,6 @@ dist
 
 # macOS
 .DS_Store
+
+# pm2 config
+pm2.config.js

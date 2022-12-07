@@ -2,13 +2,13 @@ const { Configuration, OpenAIApi } = require('openai')
 const line = require('@line/bot-sdk')
 const express = require('express')
 
-function init () {
-  // line config
-  const config = {
-    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
-    channelSecret: process.env.CHANNEL_SECRET
-  }
+// line config
+const config = {
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
+  channelSecret: process.env.CHANNEL_SECRET
+}
 
+function init () {
   const app = express()
 
   // root test

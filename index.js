@@ -64,7 +64,7 @@ async function askOpenAI (question) {
     })
 
     // res.status(200).json({ result: completion.data.choices[0].text })
-    return completion.data.choices[0].text
+    return completion.data.choices[0].text.replace(/\n/g, '')
   } catch (err) {
     // console.log(err)
     // res.status(200).json({ result: '抱歉我不知道' })

@@ -1,6 +1,6 @@
-import { Configuration, OpenAIApi } from 'openai'
-import * as line from '@line/bot-sdk'
-import express from 'express'
+const { Configuration, OpenAIApi } = require('openai')
+const line = require('@line/bot-sdk')
+const express = require('express')
 
 function init () {
   // line config

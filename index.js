@@ -10,12 +10,20 @@ function init () {
   }
 
   const app = express()
+
+  // root test
+  app.get('/', (req, res) => {
+    res.send('OpenAI Line Chatbot')
+  })
+
+  // line webhook
   app.post('/webhook', line.middleware(config), (req, res) => {
     Promise
       .all(req.body.events.map(lineEventHandler))
       .then((result) => res.json(result))
   })
 
+  // openai api test
   app.get('/bot_test', async (req, res) => {
     const result = await askOpenAI('你好，請問您的大名是？')
     res.send(result)

@@ -32,18 +32,18 @@ function init () {
   app.listen(3388)
 }
 
-async function lineEventHandler (event) {
+function lineEventHandler (event) {
   const lineClient = new line.Client(config)
 
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null)
   }
 
-  const result = await askOpenAI(event.message.text)
+  // const result = await askOpenAI(event.message.text)
 
   return client.replyMessage(event.replyToken, {
     type: 'text',
-    text: result
+    text: 'yoyoyoyoyo'
   })
 }
 

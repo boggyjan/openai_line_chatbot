@@ -32,18 +32,18 @@ function init () {
   app.listen(3388)
 }
 
-function lineEventHandler (event) {
+async function lineEventHandler (event) {
   const lineClient = new line.Client(config)
 
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null)
   }
 
-  // const result = await askOpenAI(event.message.text)
+  const result = await askOpenAI(event.message.text)
 
   return lineClient.replyMessage(event.replyToken, {
     type: 'text',
-    text: 'yoyoyoyoyo'
+    text: result
   })
 }
 
@@ -68,7 +68,7 @@ async function askOpenAI (question) {
   } catch (err) {
     // console.log(err)
     // res.status(200).json({ result: '抱歉我不知道' })
-    return null
+    return '抱歉我不知道'
   }
 }
 

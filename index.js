@@ -25,7 +25,8 @@ function init () {
 
   // openai api test
   app.get('/bot_test', async (req, res) => {
-    const result = await askOpenAI('你好，請問您的大名是？')
+    const q = req.query?.q
+    const result = await askOpenAI(q || '你好，請問您的大名是？')
     res.send(result)
   })
 
@@ -58,13 +59,13 @@ async function askOpenAI (question) {
   try {
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
-      max_tokens: 128,
+      max_tokens: 100,
       prompt: question,
-      temperature: 0.9,
+      temperature: 0.1,
     })
 
     // res.status(200).json({ result: completion.data.choices[0].text })
-    return completion.data.choices[0].text.replace(/\n/g, '')
+    return completion.data.choices[0].text.replace(/^\n+/g, '')
   } catch (err) {
     // console.log(err)
     // res.status(200).json({ result: '抱歉我不知道' })

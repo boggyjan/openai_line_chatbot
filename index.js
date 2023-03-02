@@ -57,17 +57,21 @@ async function askOpenAI (question) {
 
   // request
   try {
-    const completion = await openai.createCompletion({
-      model: 'text-davinci-003',
-      max_tokens: 100,
-      prompt: question,
-      temperature: 0.1,
+    // const completion = await openai.createCompletion({
+    //   model: 'text-davinci-003',
+    //   max_tokens: 100,
+    //   prompt: question,
+    //   temperature: 0.1,
+    // })
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: question }]
     })
-
     // res.status(200).json({ result: completion.data.choices[0].text })
-    return completion.data.choices[0].text.replace(/^\n+/g, '')
+    // return completion.data.choices[0].text.replace(/^\n+/g, '')
+    return completion.data.choices[0].message.content.replace(/^\n+/g, '')
   } catch (err) {
-    // console.log(err)
+    console.log(err)
     // res.status(200).json({ result: '抱歉我不知道' })
     return '抱歉我不知道'
   }

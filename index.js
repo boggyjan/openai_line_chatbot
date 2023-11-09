@@ -49,6 +49,8 @@ async function lineEventHandler (event) {
 }
 
 async function askOpenAI (question) {
+  return '抱歉我壞惹～'
+
   // opan ai config
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,

@@ -1,9 +1,9 @@
-const { Configuration, OpenAIApi } = require('openai')
-const line = require('@line/bot-sdk')
-const express = require('express')
+import OpenAI from 'openai'
+import line from '@line/bot-sdk'
+import express from 'express'
 
 // line config
-const config = {
+const lineConfig = {
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
   channelSecret: process.env.CHANNEL_SECRET
 }
@@ -17,7 +17,7 @@ function init () {
   })
 
   // line webhook
-  app.post('/webhook', line.middleware(config), (req, res) => {
+  app.post('/webhook', line.middleware(lineConfig), (req, res) => {
     Promise
       .all(req.body.events.map(lineEventHandler))
       .then((result) => res.json(result))
@@ -34,7 +34,7 @@ function init () {
 }
 
 async function lineEventHandler (event) {
-  const lineClient = new line.Client(config)
+  const lineClient = new line.Client(lineConfig)
 
   if (event.type !== 'message' || event.message.type !== 'text' || !event.message.text.includes('村長')) {
     return Promise.resolve(null)
@@ -49,28 +49,19 @@ async function lineEventHandler (event) {
 }
 
 async function askOpenAI (question) {
-  return '抱歉我壞惹～'
-
-  // opan ai config
-  const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  })
-  const openai = new OpenAIApi(configuration)
-
   // request
   try {
-    // const completion = await openai.createCompletion({
-    //   model: 'text-davinci-003',
-    //   max_tokens: 100,
-    //   prompt: question,
-    //   temperature: 0.1,
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+    // const completion = await openai.chat.completions.create({
+    //   model: 'gpt-4',
+    //   messages: [{ role: 'user', content: question }]
     // })
-    const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+
+    const completion = await openai.chat.completions.create({
+      model: 'ft:gpt-3.5-turbo-1106:personal::8TQwZNGO',
       messages: [{ role: 'user', content: question }]
     })
-    // res.status(200).json({ result: completion.data.choices[0].text })
-    // return completion.data.choices[0].text.replace(/^\n+/g, '')
+
     return completion.data.choices[0].message.content.replace(/^\n+/g, '')
   } catch (err) {
     console.log(err)

@@ -63,7 +63,7 @@ async function askOpenAI (question) {
       messages: [{ role: 'user', content: question }]
     })
 
-    return completion.data.choices[0].message.content.replace(/^\n+/g, '')
+    return completion.choices[0].message.content.replace(/^\n+/g, '')
   } catch (err) {
     console.log(err)
     // res.status(200).json({ result: '抱歉我不知道' })

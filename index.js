@@ -59,7 +59,7 @@ async function askOpenAI (question) {
     // })
 
     const completion = await openai.chat.completions.create({
-      model: 'ft:gpt-3.5-turbo-1106:personal::8TQwZNGO',
+      model: 'ft:gpt-3.5-turbo-1106:personal::8TRLsWlB',
       messages: [{ role: 'user', content: question }]
     })
 

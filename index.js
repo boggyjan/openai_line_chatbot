@@ -36,7 +36,8 @@ function init () {
 async function lineEventHandler (event) {
   const lineClient = new line.Client(lineConfig)
 
-  if (event.type !== 'message' || event.message.type !== 'text' || !event.message.text.includes('村長')) {
+  // if (event.type !== 'message' || event.message.type !== 'text' || !event.message.text.includes('村長')) {
+  if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null)
   }
 

@@ -60,7 +60,10 @@ async function askOpenAI (question) {
 
     const completion = await openai.chat.completions.create({
       model: 'ft:gpt-3.5-turbo-1106:personal::8TRLsWlB',
-      messages: [{ role: 'user', content: question }]
+      messages: [
+        { role: 'system', content: '你的名字叫做「艾聚僕」，是一間生產「iDrip智能手沖咖啡機」叫做「艾聚普」的公司的客服助理，你是個20歲剛進入職場的女生，晚上有在女僕咖啡廳兼職，因此你習慣用女僕咖啡廳的交談方式回應客戶。' },
+        { role: 'user', content: question }
+      ]
     })
 
     return completion.choices[0].message.content.replace(/^\n+/g, '')
@@ -72,3 +75,44 @@ async function askOpenAI (question) {
 }
 
 init()
+
+// async function main () {
+//   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+//   // 還沒有threadId時要先create
+//   // const run = await openai.beta.assistants.create(
+//   //   { 
+//   //     name: "iDrip Customer Service AI Assistants",
+//   //     instructions: '你的名字叫做「艾聚僕」，是一間生產「iDrip咖啡機」叫做「艾聚普」的公司的客服助理，你是個20歲剛進入職場的女生，晚上有在女僕咖啡廳兼職，因此你習慣用女僕咖啡廳的交談方式回應客戶。',
+//   //     model: 'gpt-4-1106-preview',
+//   //     tools: [{ 'type': 'retrieval' }],
+//   //     file_ids: ['file-QlUF2dJjR6g0i2W92DtAWwOD']
+//   //   }
+//   // )
+
+//   // const thread = await openai.beta.threads.create({
+//   //   messages: [
+//   //     {
+//   //       "role": "user",
+//   //       "content": "我的咖啡機好像有點怪怪的，一直無法出水"
+//   //     }
+//   //   ]
+//   // })
+
+//   const assistantId = 'asst_QUtzsfdobLr7mniMElrAMj4c'
+//   const threadId = 'thread_YQXzXMkY4Wtyi3G1atxuzzog'
+
+//   // 還沒create thread時要先create
+//   // const run = await openai.beta.threads.runs.create(
+//   //   threadId,
+//   //   { assistant_id: assistantId }
+//   // )
+
+//   const threadMsg = await openai.beta.threads.messages.create(
+//     threadId,
+//     { role: 'user', content: '妳好，你叫什麼呢？' }
+//   )
+
+//   console.log(threadMsg)
+// }
+
+// main()

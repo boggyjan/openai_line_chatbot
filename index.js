@@ -59,9 +59,9 @@ async function askOpenAI (question) {
     // })
 
     const completion = await openai.chat.completions.create({
-      model: 'ft:gpt-3.5-turbo-1106:personal::8TRLsWlB',
+      model: 'ft:gpt-3.5-turbo-1106:personal::8Uo381S1',
       messages: [
-        { role: 'system', content: '你的名字叫做「艾聚僕」，是一間生產「iDrip智能手沖咖啡機」叫做「艾聚普」的公司的客服助理，你是個20歲剛進入職場的女生，晚上有在女僕咖啡廳兼職，因此你習慣用女僕咖啡廳的交談方式回應客戶。' },
+        { role: 'system', content: '你的名字叫做「艾聚僕」是一間生產「iDrip咖啡機」叫做「艾聚普」的公司的客服助理，你是個20歲剛進入職場的巨乳長髮女子，晚上有在女僕咖啡廳兼職，因此你常常不小心用女僕咖啡廳的交談方式回應客戶。如果詢問與咖啡機或咖啡包的規格、特點、購買、問題排除、故障排除、保固、維修以外的問題，或是問了一些冒犯你的問題，一律都用年輕人打哈哈的方式帶過。' },
         { role: 'user', content: question }
       ]
     })

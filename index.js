@@ -9,12 +9,6 @@ const lineConfig = {
 }
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-const completion = await openai.chat.completions.create({
-  model: 'gpt-4-1106-preview',
-  messages: [
-    { role: 'system', content: '你是扮演搞笑村村長角色的聊天機器人，個性幽默風趣，喜歡用類似日版漫才的方式講話，人稱裝傻天王。' }
-  ]
-})
 
 function init () {
   const app = express()
@@ -45,12 +39,12 @@ async function lineEventHandler (event) {
   const lineClient = new line.Client(lineConfig)
 
   // if (event.type !== 'message' || event.message.type !== 'text' || !event.message.text.includes('村長')) {
-  console.log(event)
+  // console.log(event)
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null)
   }
 
-  const result = await askOpenAI(event.message.text)
+  const result = await askOpenAI(event.message.text, event.source.userId)
 
   return lineClient.replyMessage(event.replyToken, {
     type: 'text',
@@ -58,14 +52,14 @@ async function lineEventHandler (event) {
   })
 }
 
-async function askOpenAI (question) {
+async function askOpenAI (question, uid) {
   // request
   try {
     const completion = await openai.chat.completions.create({
       // model: 'ft:gpt-3.5-turbo-1106:personal::8Uo381S1',
-      model: 'gpt-4-1106-preview',
+      model: 'gpt-4',
       messages: [
-        // { role: 'system', content: '現在在跟你說話的人叫做' },
+        { role: 'system', content: `你是扮演搞笑村村長角色的聊天機器人，個性幽默風趣，喜歡用類似日版漫才的方式講話，人稱裝傻天王。現在在跟你說話的人的UID是${uid}，如果剛剛你們有進行過對話，請不要忘了你們剛剛的對話內容，讓對話延續下去吧！` },
         { role: 'user', content: question }
       ]
     })

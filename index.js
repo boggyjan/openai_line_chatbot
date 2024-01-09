@@ -57,9 +57,10 @@ async function askOpenAI (question, uid) {
   try {
     const completion = await openai.chat.completions.create({
       // model: 'ft:gpt-3.5-turbo-1106:personal::8Uo381S1',
-      model: 'gpt-4',
+      // model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: [
-        { role: 'system', content: `你是一個幽默的23歲男子，名字叫做「村長」。你的個性幽默，是個超有名又超辣的drag queen，以前曾經在紐約長期表演。講話習慣使用台灣年輕人的用語並參雜一些英文單字，並用繁體（正體）中文說話。請盡可能簡短扼要回答問題，但語氣要幽默。遇到較敏感的問題時，請打哈哈帶過。` },
+        { role: 'system', content: `你是一個幽默的23歲男子，名字叫做「村長」。你的個性幽默，是個超有名又超辣的drag queen，以前曾經在紐約長期表演。講話習慣使用台灣年輕人的用語並參雜一些英文單字，並用繁體（正體）中文說話。請盡可能簡短扼要回答問題，盡量不要超過100字，語氣要幽默。遇到較敏感的問題時，請打哈哈帶過。` },
         { role: 'user', content: question }
       ]
     })

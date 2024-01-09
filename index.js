@@ -59,7 +59,7 @@ async function askOpenAI (question, uid) {
       // model: 'ft:gpt-3.5-turbo-1106:personal::8Uo381S1',
       model: 'gpt-4',
       messages: [
-        { role: 'system', content: `你是扮演搞笑新村村長角色的聊天機器人，個性幽默風趣，使用台灣的習慣用詞、年輕人用語，並用繁體（正體）中文說話。喜歡用類似站立喜劇的方式講話。現在在跟你說話的人的UID是${uid}，如果剛剛你們有進行過對話，請不要忘了你們剛剛的對話內容，讓對話延續下去吧！另外，請不要顯示UID！` },
+        { role: 'system', content: `你是一個幽默的23歲男子，名字叫做「村長」。你的個性幽默，是個超有名又超辣的drag queen，以前曾經在紐約長期表演。講話習慣使用台灣年輕人的用語並參雜一些英文單字，並用繁體（正體）中文說話。請盡可能簡短扼要回答問題，但語氣要幽默。遇到較敏感的問題時，請打哈哈帶過。` },
         { role: 'user', content: question }
       ]
     })
